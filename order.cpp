@@ -21,6 +21,7 @@ int main() {
 	std::map<std::string, size_t> ranks;
 	std::vector<std::string> order;
 	std::vector<report> reports;
+	std::map<std::pair<std::string, std::string>, size_t> reportmap;
 
 	char s[2000];
 	while (fgets(s, 2000, asked)) {
@@ -42,6 +43,10 @@ int main() {
 			fprintf(stderr, "??? %s\n", cmp);
 			continue;
 		}
+
+		std::pair<std::string, std::string> k = std::pair<std::string, std::string>(one, two);
+		std::pair<std::pair<std::string, std::string>, size_t> p = std::pair<std::pair<std::string, std::string>, size_t>(k, reports.size());
+		reportmap.insert(p);
 
 		report r;
 		r.a = one;
@@ -84,7 +89,7 @@ int main() {
 			}
 		}
 
-		printf("%zu\n", errors);
+		fprintf(stderr, "%zu\n", errors);
 
 		if (errors == 0) {
 			break;
@@ -92,6 +97,17 @@ int main() {
 	}
 
 	for (size_t i = 0; i < order.size(); i++) {
-		printf("%s\n", order[i].c_str());
+		printf("%s", order[i].c_str());
+
+		if (i + 1 < order.size()) {
+			if (reportmap.count(std::pair<std::string, std::string>(order[i], order[i + 1])) ||
+			    reportmap.count(std::pair<std::string, std::string>(order[i + 1], order[i]))) {
+				printf("\n");
+			} else {
+				printf(" ");
+			}
+		} else {
+			printf("\n");
+		}
 	}
 }
