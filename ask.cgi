@@ -72,15 +72,16 @@ print "<form action='/cgi-bin/ask.cgi' method='post'>\n";
 print "<input type='hidden' name='tlid1' value='$k1'>\n";
 print "<input type='hidden' name='tlid2' value='$k2'>\n";
 
-print "<table><tr><td>";
+# print "<table><tr><td>";
 
-print "<img src='/tlid/$k1.jpg'>";
-print "<p>";
+print "<img src='/tlid/$k1.jpg'> ";
+# print "<p>";
 print "<input type='Submit' name='pref' value='First'>\n";
-print "</td><td>";
-print "<img src='/tlid/$k2.jpg'>";
+# print "</td><td>";
 print "<p>\n";
+print "<img src='/tlid/$k2.jpg'> ";
+# print "<p>\n";
 print "<input type='Submit' name='pref' value='Second'>\n";
-print "</td></tr>";
+# print "</td></tr>";
 
 print "</form>\n";

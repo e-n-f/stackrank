@@ -6,14 +6,14 @@ var key = require('./key.json');
 var turf = require('turf');
 var edges = require('./tl_2010_06075_edges.json');
 
-function extract(end, mid, tlid, part) {
+function extract(end, mid, tlid, part, name) {
 	// looking from
-	var ilon = end.geometry.coordinates[0];
-	var ilat = end.geometry.coordinates[1];
+	var ilon = mid.geometry.coordinates[0];
+	var ilat = mid.geometry.coordinates[1];
 
 	// looking toward
-	var lon = mid.geometry.coordinates[0];
-	var lat = mid.geometry.coordinates[1];
+	var lon = end.geometry.coordinates[0];
+	var lat = end.geometry.coordinates[1];
 
 	var ang = Math.atan2(lat - ilat, lon - ilon) * 180 / Math.PI;
 
@@ -21,9 +21,9 @@ function extract(end, mid, tlid, part) {
         ang += 90;  // atan2 starts at 3:00, streetview starts at 12:00
         ang = ang % 360;
 
-	var url = "http://maps.googleapis.com/maps/api/streetview?size=640x640&key=" + key.key + "&location=" + ilat + "," + ilon + "&fov=90&heading=" + ang + "&pitch=0&sensor=false";
+	var url = "http://maps.googleapis.com/maps/api/streetview?size=640x375&key=" + key.key + "&location=" + ilat + "," + ilon + "&fov=120&heading=" + ang + "&pitch=0&sensor=false";
 
-	console.log(tlid + " " + part + " " + ilat + "," + ilon + " " + lat + "," + lon + " " + ang + " " + url);
+	console.log(tlid + " " + part + " " + ilat + "," + ilon + " " + lat + "," + lon + " " + ang + " " + url + " " + name);
 }
 
 edges.features.forEach(function(edge) {
@@ -43,6 +43,6 @@ edges.features.forEach(function(edge) {
 	var end2 = turf.along(edge, len, 'miles');
 	var mid2 = turf.along(edge, len - .02, 'miles');
 
-	extract(end1, mid1, edge.properties.TLID, "a");
-	extract(end2, mid2, edge.properties.TLID, "b");
+	extract(end1, mid1, edge.properties.TLID, "a", edge.properties.FULLNAME);
+	extract(end2, mid2, edge.properties.TLID, "b", edge.properties.FULLNAME);
 });
