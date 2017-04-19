@@ -12,7 +12,7 @@ struct report {
 };
 
 int main() {
-	FILE *asked = fopen("asked", "r");
+	FILE *asked = fopen("asked2", "r");
 	if (asked == NULL) {
 		perror("fopen");
 		exit(EXIT_FAILURE);
@@ -104,7 +104,7 @@ int main() {
 			    reportmap.count(std::pair<std::string, std::string>(order[i + 1], order[i]))) {
 				printf("\n");
 			} else {
-				printf(" ");
+				printf("\n");
 			}
 		} else {
 			printf("\n");
