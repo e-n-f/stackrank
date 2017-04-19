@@ -23,8 +23,15 @@ int main() {
 	std::vector<report> reports;
 	std::map<std::pair<std::string, std::string>, size_t> reportmap;
 
+	std::multimap<int, std::string> inputs;
+
 	char s[2000];
 	while (fgets(s, 2000, asked)) {
+		inputs.insert(std::pair<int, std::string>(rand(), s));
+	}
+
+	for (auto a : inputs) {
+		const char *s = a.second.c_str();
 		char one[2000];
 		char two[2000];
 		char cmp[2000];
