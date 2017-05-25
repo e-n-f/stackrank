@@ -8,12 +8,12 @@ var edges = require('./tl_2010_06075_edges.json');
 
 function extract(end, mid, tlid, part, name) {
         // looking from
-        var ilon = mid.geometry.coordinates[0];
-        var ilat = mid.geometry.coordinates[1];
+        var ilon = end.geometry.coordinates[0];
+        var ilat = end.geometry.coordinates[1];
 
         // looking toward
-        var lon = end.geometry.coordinates[0];
-        var lat = end.geometry.coordinates[1];
+        var lon = mid.geometry.coordinates[0];
+        var lat = mid.geometry.coordinates[1];
 
         var ang = Math.atan2(lat - ilat, lon - ilon) * 180 / Math.PI;
 

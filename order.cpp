@@ -11,8 +11,12 @@ struct report {
 	int diff;
 };
 
-int main() {
-	FILE *asked = fopen("asked2", "r");
+int main(int argc, char **argv) {
+	if (argc > 1) {
+		srand(atoi(argv[1]));
+	}
+
+	FILE *asked = fopen("asked", "r");
 	if (asked == NULL) {
 		perror("fopen");
 		exit(EXIT_FAILURE);
