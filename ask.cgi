@@ -53,16 +53,20 @@ while (1) {
 	if (! -s "/var/www/tlid/$k1.jpg") {
 		system "curl -q -m60 -L -o /var/www/tlid/$k1.jpg '$url{$k1}'";
 	}
+if (0) {
 	if (! -s "/var/www/tlid/${k1}a.jpg") {
 		system "curl -q -m60 -L -o /var/www/tlid/${k1}a.jpg '$url2{$k1}'";
 	}
+}
 
 	if (! -s "/var/www/tlid/$k2.jpg") {
 		system "curl -q -m60 -L -o /var/www/tlid/$k2.jpg '$url{$k2}'";
 	}
+if (0) {
 	if (! -s "/var/www/tlid/${k2}a.jpg") {
 		system "curl -q -m60 -L -o /var/www/tlid/${k2}a.jpg '$url2{$k2}'";
 	}
+}
 
 	($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size, $atime,$mtime,$ctime,$blksize,$blocks) = stat("/var/www/tlid/$k1.jpg");
 	if ($size < 10000) {
@@ -81,14 +85,14 @@ print "<input type='hidden' name='tlid2' value='$k2'>\n";
 
 # print "<table><tr><td>";
 
-print "<img src='/tlid/$k1.jpg'>";
-print "<img src='/tlid/${k1}a.jpg'> ";
+print "<img src='/tlid/$k1.jpg'> ";
+# print "<img src='/tlid/${k1}a.jpg'> ";
 # print "<p>";
 print "<input type='Submit' name='pref' value='First'>\n";
 # print "</td><td>";
 print "<p>\n";
-print "<img src='/tlid/$k2.jpg'>";
-print "<img src='/tlid/${k2}a.jpg'> ";
+print "<img src='/tlid/$k2.jpg'> ";
+# print "<img src='/tlid/${k2}a.jpg'> ";
 # print "<p>\n";
 print "<input type='Submit' name='pref' value='Second'>\n";
 # print "</td></tr>";
