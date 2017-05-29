@@ -3,6 +3,7 @@
 #include <string.h>
 #include <vector>
 #include <map>
+#include <set>
 #include <string>
 
 struct report {
@@ -26,12 +27,28 @@ int main(int argc, char **argv) {
 	std::vector<std::string> order;
 	std::vector<report> reports;
 	std::map<std::pair<std::string, std::string>, size_t> reportmap;
+	std::set<std::string> rejects;
 
 	std::multimap<int, std::string> inputs;
 
 	char s[2000];
 	while (fgets(s, 2000, asked)) {
 		inputs.insert(std::pair<int, std::string>(rand(), s));
+
+		char one[2000];
+		char two[2000];
+		char cmp[2000];
+
+		if (sscanf(s, "%s %s %s", one, two, cmp) != 3) {
+			continue;
+		}
+
+		if (strcmp(cmp, "RejectA0First") == 0) {
+			rejects.insert(one);
+		}
+		if (strcmp(cmp, "RejectA0Second") == 0) {
+			rejects.insert(two);
+		}
 	}
 
 	for (auto a : inputs) {
@@ -42,6 +59,13 @@ int main(int argc, char **argv) {
 
 		if (sscanf(s, "%s %s %s", one, two, cmp) != 3) {
 			fprintf(stderr, "??? %s", s);
+			continue;
+		}
+
+		if (rejects.count(one)) {
+			continue;
+		}
+		if (rejects.count(two)) {
 			continue;
 		}
 
